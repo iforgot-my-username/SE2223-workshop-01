@@ -1,0 +1,10 @@
+.container-div{
+    max-width: 168px;
+    height: 300px;
+}
+
+.img-div {
+    max-width: 150px;
+    min-height: 160px;
+    max-height: 160px;
+}
