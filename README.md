@@ -27,24 +27,3 @@ npm i react-circular-progressbar
 
 <br/>
     
-## Another Versions for **ProductSection.tsx** from LINE ***46***
-```typescript
-    const itemPrices: { [key: string]: { [key: string]: number } } = {}
-
-    const items: JSX.Element[] = [];
-
-    products.forEach(({ name, price, event, pictureSrc, oldPrice }: ProductProps, index: number) => {
-        const key = name + '->' + pictureSrc;
-        if (itemPrices[key] === undefined) {
-            items.push(
-                <ProductCard name={name} price={price} pictureSrc={pictureSrc} event={event} onClick={setState} key={index}></ProductCard>
-            );
-            itemPrices[key] = { price, index: items.length }
-        } else {
-            items[itemPrices[key].index] =
-                <ProductCard name={name} price={price} pictureSrc={pictureSrc} event={event} onClick={setState} oldPrice={itemPrices[key].price} key={index}></ProductCard>
-
-        }
-        itemPrices[key].price = price;
-    });
-```
