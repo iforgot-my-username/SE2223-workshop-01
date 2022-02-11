@@ -43,27 +43,6 @@ export default function ProductSection({ products }: ProductSectionProps) {
         setsaleDate('');
     }
 
-<<<<<<< HEAD
-    const items: JSX.Element[] = [];
-    const itemPrices: { [key: string]: number } = {}
-
-    products.forEach(({ name, price, event, pictureSrc }: ProductProps, index: number) => {
-        const key = name + '->' + pictureSrc;
-        if (itemPrices[key] === undefined) {
-            items.push(
-                <ProductCard name={name} price={price} pictureSrc={pictureSrc} event={event} onClick={setState} key={index}></ProductCard>
-            );
-        } else {
-            items.push(
-                <ProductCard name={name} price={price} pictureSrc={pictureSrc} event={event} onClick={setState} oldPrice={itemPrices[key]} key={index}></ProductCard>
-            );
-        }
-        itemPrices[key] = price;
-
-        // console.log(Object.values(productss))
-    });
-    console.log(Object.values(itemPrices))
-=======
     const filteredItems: { [key: string]: ProductProps } = {}
 
     products.forEach((product: ProductProps) => {
@@ -87,7 +66,6 @@ export default function ProductSection({ products }: ProductSectionProps) {
             <ProductCard name={name} price={price} oldPrice={oldPrice} pictureSrc={pictureSrc} event={event} onClick={setState} key={index}></ProductCard>
         );
     });
->>>>>>> parent of 645c20f (Product card v4)
 
     return (
         <div className="container-fluid section-div shadow pt-3">
