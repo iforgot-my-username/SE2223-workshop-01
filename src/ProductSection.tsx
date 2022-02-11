@@ -43,24 +43,24 @@ export default function ProductSection({ products }: ProductSectionProps) {
         setsaleDate('');
     }
 
-    const itemPrices: { [key: string]: { [key: string]: number } } = {}
-
     const items: JSX.Element[] = [];
+    const itemPrices: { [key: string]: number } = {}
 
-    products.forEach(({ name, price, event, pictureSrc, oldPrice }: ProductProps, index: number) => {
+    products.forEach(({ name, price, event, pictureSrc }: ProductProps, index: number) => {
         const key = name + '->' + pictureSrc;
         if (itemPrices[key] === undefined) {
             items.push(
                 <ProductCard name={name} price={price} pictureSrc={pictureSrc} event={event} onClick={setState} key={index}></ProductCard>
             );
-            itemPrices[key] = { price, index: items.length }
         } else {
-            items[itemPrices[key].index] =
-                <ProductCard name={name} price={price} pictureSrc={pictureSrc} event={event} onClick={setState} oldPrice={itemPrices[key].price} key={index}></ProductCard>
-
+            items.push(
+                <ProductCard name={name} price={price} pictureSrc={pictureSrc} event={event} onClick={setState} oldPrice={itemPrices[key]} key={index}></ProductCard>
+            );
         }
-        itemPrices[key].price = price;
+        itemPrices[key] = price;
+
     });
+    console.log(Object.values(itemPrices))
 
     return (
         <div className="container-fluid section-div shadow pt-3">
