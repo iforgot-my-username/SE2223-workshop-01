@@ -6,7 +6,7 @@ import './ProductSection.css';
 interface ProductProps {
     name: string;
     price: number;
-    oldPrice?: number;
+    markDown?: number;
     event: Date;
     pictureSrc: string;
 }
@@ -43,27 +43,11 @@ export default function ProductSection({ products }: ProductSectionProps) {
         setsaleDate('');
     }
 
-    const filteredItems: { [key: string]: ProductProps } = {}
-
-    products.forEach((product: ProductProps) => {
-        const { name, pictureSrc } = product
-        const productKey = name + '->' + pictureSrc;
-
-        if (filteredItems[productKey] === undefined) {
-            filteredItems[productKey] = product;
-        } else {
-            const oldPrice = filteredItems[productKey].price
-
-            filteredItems[productKey] = { ...product, oldPrice }
-        }
-    });
-
-
     const items: JSX.Element[] = [];
 
-    Object.values(filteredItems).forEach(({ name, price, oldPrice, event, pictureSrc }: ProductProps, index: number) => {
+    products.forEach(({ name, price, markDown, event, pictureSrc }: ProductProps, index: number) => {
         items.push(
-            <ProductCard name={name} price={price} oldPrice={oldPrice} pictureSrc={pictureSrc} event={event} onClick={setState} key={index}></ProductCard>
+            <ProductCard name={name} price={price} markDown={markDown} pictureSrc={pictureSrc} event={event} onClick={setState} key={index}></ProductCard>
         );
     });
 

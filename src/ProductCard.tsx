@@ -4,14 +4,15 @@ import './ProductCard.css';
 interface ProductCardProps {
     name: string;
     price: number;
-    oldPrice?: number;
+    markDown?: number;
     pictureSrc: string;
     event: Date;
     onClick: Function;
 }
 
-export default function ProductCard({ event, onClick, name, price, pictureSrc, oldPrice }: ProductCardProps) {
+export default function ProductCard({ event, onClick, name, price, pictureSrc, markDown }: ProductCardProps) {
     const formatedPrice = price.toFixed(2);
+    const currentPrice = (markDown ?? price).toFixed(2)
 
     function handleSetSate() {
         onClick(event);
@@ -26,15 +27,15 @@ export default function ProductCard({ event, onClick, name, price, pictureSrc, o
                 <div className="row-1 mt-1 overflow-auto">
                     <h5>{name}</h5>
                 </div>
-                <div className="d-inline-flex flex-row  mt-1 ">
-                    {oldPrice && <div className="col opacity-50">
-                        <p><del>₱{oldPrice}</del></p>
+                <div className="d-inline-flex flex-row mt-1 overflow-auto">
+                    {markDown && <div className="col mr-2 opacity-50">
+                        <p><del>₱{formatedPrice}</del></p>
                     </div>}
-                    <div className="col">
-                        <h6>₱{formatedPrice}</h6>
+                    <div className="col ml-5">
+                        <h6>₱{currentPrice}</h6>
                     </div>
                 </div>
-                <div className="row-2">
+                <div className="d-flex justify-content-center">
                     < button className="btn btn-danger shadow" onClick={handleSetSate} >Check Sale!</ button >
                 </div>
             </div>
