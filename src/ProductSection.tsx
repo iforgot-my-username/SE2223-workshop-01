@@ -43,29 +43,33 @@ export default function ProductSection({ products }: ProductSectionProps) {
         setsaleDate('');
     }
 
-    const filteredItems: { [key: string]: ProductProps } = {}
-
-    products.forEach((product: ProductProps) => {
-        const { name, pictureSrc } = product
-        const productKey = name + '->' + pictureSrc;
-
-        if (filteredItems[productKey] === undefined) {
-            filteredItems[productKey] = product;
-        } else {
-            const oldPrice = filteredItems[productKey].price
-
-            filteredItems[productKey] = { ...product, oldPrice }
-        }
-    });
-
+    const itemPrices: { [key: string]: { [key: string]: number } } = {}
 
     const items: JSX.Element[] = [];
 
-    Object.values(filteredItems).forEach(({ name, price, oldPrice, event, pictureSrc }: ProductProps, index: number) => {
-        items.push(
-            <ProductCard name={name} price={price} oldPrice={oldPrice} pictureSrc={pictureSrc} event={event} onClick={setState} key={index}></ProductCard>
-        );
+    products.forEach(({ name, price, event, pictureSrc, oldPrice }: ProductProps, index: number) => {
+        const key = name + '->' + pictureSrc;
+        if (itemPrices[key] === undefined) {
+            items.push(
+                <ProductCard name={name} price={price} pictureSrc={pictureSrc} event={event} onClick={setState} key={index}></ProductCard>
+            );
+            itemPrices[key] = { price, index: items.length }
+        } else {
+            items[itemPrices[key].index] =
+                <ProductCard name={name} price={price} pictureSrc={pictureSrc} event={event} onClick={setState} oldPrice={itemPrices[key].price} key={index}></ProductCard>
+
+        }
+        itemPrices[key].price = price;
     });
+
+
+
+
+    // Object.values(filteredItems).forEach(({ name, price, oldPrice, event, pictureSrc }: ProductProps, index: number) => {
+    //     items.push(
+    //         <ProductCard name={name} price={price} oldPrice={oldPrice} pictureSrc={pictureSrc} event={event} onClick={setState} key={index}></ProductCard>
+    //     );
+    // });
 
     return (
         <div className="container-fluid section-div shadow pt-3">
