@@ -59,6 +59,7 @@ export default function ProductSection({ products }: ProductSectionProps) {
         }
         itemPrices[key] = price;
 
+        // console.log(Object.values(productss))
     });
     console.log(Object.values(itemPrices))
 
