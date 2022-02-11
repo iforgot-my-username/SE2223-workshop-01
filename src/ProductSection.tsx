@@ -6,6 +6,7 @@ import './ProductSection.css';
 interface ProductProps {
     name: string;
     price: number;
+    oldPrice?: number;
     event: Date;
     pictureSrc: string;
 }
@@ -13,6 +14,7 @@ interface ProductProps {
 interface ProductSectionProps {
     products: ProductProps[];
 }
+
 export default function ProductSection({ products }: ProductSectionProps) {
     const [saleDate, setsaleDate] = useState('');
 
@@ -42,13 +44,24 @@ export default function ProductSection({ products }: ProductSectionProps) {
     }
 
     const items: JSX.Element[] = [];
+    const itemPrices: { [key: string]: number } = {}
 
-    products.forEach(({ name, price, event, pictureSrc }: ProductProps) => {
-        items.push(
-            <ProductCard name={name} price={price} pictureSrc={pictureSrc} event={event} onClick={setState}></ProductCard>
-        );
-    })
+    products.forEach(({ name, price, event, pictureSrc }: ProductProps, index: number) => {
+        const key = name + '->' + pictureSrc;
+        if (itemPrices[key] === undefined) {
+            items.push(
+                <ProductCard name={name} price={price} pictureSrc={pictureSrc} event={event} onClick={setState} key={index}></ProductCard>
+            );
+        } else {
+            items.push(
+                <ProductCard name={name} price={price} pictureSrc={pictureSrc} event={event} onClick={setState} oldPrice={itemPrices[key]} key={index}></ProductCard>
+            );
+        }
+        itemPrices[key] = price;
 
+        // console.log(Object.values(productss))
+    });
+    console.log(Object.values(itemPrices))
 
     return (
         <div className="container-fluid section-div shadow pt-3">
