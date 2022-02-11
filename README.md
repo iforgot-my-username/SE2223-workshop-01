@@ -27,7 +27,7 @@ npm i react-circular-progressbar
 
 <br/>
     
-## Another Versions for **ProductSection.tsx**
+## Another Versions for **ProductSection.tsx** from LINE ***46***
 ```typescript
     const itemPrices: { [key: string]: { [key: string]: number } } = {}
 
