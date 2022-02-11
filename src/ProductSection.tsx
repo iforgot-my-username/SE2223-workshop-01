@@ -62,15 +62,6 @@ export default function ProductSection({ products }: ProductSectionProps) {
         itemPrices[key].price = price;
     });
 
-
-
-
-    // Object.values(filteredItems).forEach(({ name, price, oldPrice, event, pictureSrc }: ProductProps, index: number) => {
-    //     items.push(
-    //         <ProductCard name={name} price={price} oldPrice={oldPrice} pictureSrc={pictureSrc} event={event} onClick={setState} key={index}></ProductCard>
-    //     );
-    // });
-
     return (
         <div className="container-fluid section-div shadow pt-3">
             <div className="col ">
