@@ -1,0 +1,16 @@
+.progress-div {
+   position: 'relative';
+   max-width: 90px;
+   min-width: 65px
+}
+
+.time-label {
+
+   font-size: 15px;
+   margin-top: -5;
+}
+
+.text-label {
+   font-size: 12px;
+   margin-top: -5;
+}
