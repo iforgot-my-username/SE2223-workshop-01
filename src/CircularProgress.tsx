@@ -10,13 +10,12 @@ interface CircularProgressProps {
     label: string;
 }
 
+function pluralize(label: string, value: number) {
+    return value < 1 ? label : label + 's'
+}
+
+
 export default function CircularProgress({ label, value, percentage }: CircularProgressProps) {
-
-    function pluralize(label: string, value: number) {
-        return value < 1 ? label : label + 's'
-    }
-
-
 
     return (
         <div className='progress-div'  >
