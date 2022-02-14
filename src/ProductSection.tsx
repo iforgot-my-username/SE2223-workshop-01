@@ -7,8 +7,8 @@ interface ProductProps {
     name: string;
     price: number;
     markDown?: number;
-    event: Date;
-    pictureSrc: string;
+    saleDate: Date;
+    pictureSrc?: string;
 }
 
 interface ProductSectionProps {
@@ -16,40 +16,33 @@ interface ProductSectionProps {
 }
 
 export default function ProductSection({ products }: ProductSectionProps) {
-    const [saleDate, setsaleDate] = useState('');
+    const [saleDate, setSaleDate] = useState('');
 
 
     function setState(date: Date) {
         const strDate = date.toString();
 
         if (saleDate === '') {
-            setsaleDate(strDate);
+            setSaleDate(strDate);
 
         } else {
             new Promise(
                 (resolve, reject) => {
-                    setsaleDate('');
+                    setSaleDate('');
                     resolve(true);
                 }
             ).then(
                 () => {
-                    setsaleDate(strDate);
+                    setSaleDate(strDate);
                 }
             );
         }
     }
 
     function Close() {
-        setsaleDate('');
+        setSaleDate('');
     }
 
-    const items: JSX.Element[] = [];
-
-    products.forEach(({ name, price, markDown, event, pictureSrc }: ProductProps, index: number) => {
-        items.push(
-            <ProductCard name={name} price={price} markDown={markDown} pictureSrc={pictureSrc} event={event} onClick={setState} key={index}></ProductCard>
-        );
-    });
 
     return (
         <div className="container-fluid section-div shadow pt-3">
@@ -63,7 +56,12 @@ export default function ProductSection({ products }: ProductSectionProps) {
                     </div>
                 </div>
                 <div className="d-flex product-div overflow-auto">
-                    {items}
+                    {products.map((product, index) => {
+                        const key = product.name + index.toString()
+                        return <ProductCard product={{ ...product, onClick: setState }} key={key}></ProductCard>
+                    })
+                    }
+
                 </div>
             </div>
         </div >

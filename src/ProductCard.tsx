@@ -1,28 +1,26 @@
 import React from 'react';
+import Product from './product';
+import logo from './logo.svg'
 import './ProductCard.css';
 
 interface ProductCardProps {
-    name: string;
-    price: number;
-    markDown?: number;
-    pictureSrc: string;
-    event: Date;
-    onClick: Function;
+    product: Product
 }
 
-export default function ProductCard({ event, onClick, name, price, pictureSrc, markDown }: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
+    const { saleDate, onClick, name, price, pictureSrc, markDown } = product
     const formatedPrice = price.toFixed(2);
     const currentPrice = (markDown ?? price).toFixed(2)
 
     function handleSetSate() {
-        onClick(event);
+        onClick(saleDate);
     }
 
     return (
         <>
             <div className="d-inline-flex flex-column container-div py-3 m-2 px-2 mw-1">
                 <div className="row-1">
-                    <img className="img-thumbnail img-div shadow" src={pictureSrc} alt="Responsive"></img>
+                    <img className="img-thumbnail img-div shadow" src={pictureSrc ?? logo} alt={name}></img>
                 </div>
                 <div className="row-1 mt-1 overflow-auto">
                     <h5>{name}</h5>
