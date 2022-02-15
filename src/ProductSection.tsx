@@ -37,7 +37,6 @@ export default function ProductSection({ products }: ProductSectionProps) {
     setsaleDate("");
   }
 
-  const items: JSX.Element[] = [];
   const itemPrices: { [key: string]: number } = {};
 
   return (
