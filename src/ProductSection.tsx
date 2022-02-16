@@ -52,8 +52,6 @@ export default function ProductSection({ products }: ProductSectionProps) {
     }
   });
 
-  const items: JSX.Element[] = [];
-
   return (
     <div className="container-fluid section-div shadow pt-3">
       <div className="col ">
