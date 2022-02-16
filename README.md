@@ -1,50 +1,36 @@
 # **SE2223-workshop-01**
+
 ## Submitted By:
+
 Paul Vincent Garibay  
 BSSE-2  
-Feb. 08, 20222  
+Feb. 08, 20222
 
 ## Dependencies
+
 ```
 npm i humanize-duration
 npm install --save @types/humanize-duration
 npm i react-circular-progressbar
 ```
+
 ## References
-* https://www.youtube.com/watch?v=Dorf8i6lCuk
-* https://flaviocopes.com/react-how-to-loop/
+
+- https://www.youtube.com/watch?v=Dorf8i6lCuk
+- https://flaviocopes.com/react-how-to-loop/
 
 <br />
 
-# ***REFLECTION***
-## * *How does if feel like to invent your own HTML "tags" by writing React components?*    
->> It feels more convenient as it makes your code much cleaner and much easier to keep track especially of the html "tags".   
+# **_REFLECTION_**
+
+## \* _How does if feel like to invent your own HTML "tags" by writing React components?_
+
+> > It feels more convenient as it makes your code much cleaner and much easier to keep track especially of the html "tags".  
 
 <br/>
 
-## * *How different is this from your experience writing frontends in EJS or plain HTML?  Does using React improve on any quality attribute in the image?  How about business qualities?*    
->> Compared to plain HTML, React is easier when it comes to  sending/rendering data from the front-end to the UI as it also allows you to make a layout and reuse it again but in a cleaner way. React improves **modifiability** because you can customize your own elements "tag" and it also gives the benefit of *Shorter* **time to the market** and **rollout schedule** because you can reuse your layouts. Furthermore, it possesses the qualities of **'Usability'** and **'Testability'** because by slicing the application and layouts into bits, you can test each layout independently from the others and you can make use the simple block like that of Lego blocks to create more complex layouts.     
+## \* _How different is this from your experience writing frontends in EJS or plain HTML? Does using React improve on any quality attribute in the image? How about business qualities?_
+
+> > Compared to plain HTML, React is easier when it comes to sending/rendering data from the front-end to the UI as it also allows you to make a layout and reuse it again but in a cleaner way. React improves **modifiability** because you can customize your own elements "tag" and it also gives the benefit of _Shorter_ **time to the market** and **rollout schedule** because you can reuse your layouts. Furthermore, it possesses the qualities of **'Usability'** and **'Testability'** because by slicing the application and layouts into bits, you can test each layout independently from the others and you can make use the simple block like that of Lego blocks to create more complex layouts.
 
 <br/>
-    
-## Another Versions for **ProductSection.tsx** from LINE ***46***
-```typescript
-    const itemPrices: { [key: string]: { [key: string]: number } } = {}
-
-    const items: JSX.Element[] = [];
-
-    products.forEach(({ name, price, event, pictureSrc, oldPrice }: ProductProps, index: number) => {
-        const key = name + '->' + pictureSrc;
-        if (itemPrices[key] === undefined) {
-            items.push(
-                <ProductCard name={name} price={price} pictureSrc={pictureSrc} event={event} onClick={setState} key={index}></ProductCard>
-            );
-            itemPrices[key] = { price, index: items.length }
-        } else {
-            items[itemPrices[key].index] =
-                <ProductCard name={name} price={price} pictureSrc={pictureSrc} event={event} onClick={setState} oldPrice={itemPrices[key].price} key={index}></ProductCard>
-
-        }
-        itemPrices[key].price = price;
-    });
-```
